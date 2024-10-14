@@ -1,84 +1,105 @@
-import SendIcon from '@mui/icons-material/Send';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import SendIcon from "@mui/icons-material/Send";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+
 const Footer = () => {
   return (
-    <>
-      <div className="bg-black text-white">
-        <div className="flex justify-around items-start px-28 py-3">
-        <div className="flex flex-1 flex-col gap-1 items-start">
-        <h1 className='h11'>Exclusive</h1>
-        <h2>subscribe</h2>
-        <p>get 10% off that order</p>
-        <div className="relative">
-        <input className='bg-black text-slate-400 border-2 border-slate-50 outline-none rounded-sm py-1 px-3' placeholder='Enter your email' />
-        <SendIcon className='absolute right-2 top-1/2 -translate-y-1/2 text-white' />
+    <div className="bg-black text-white">
+      <div className="flex flex-col gap-5 px-6 py-3 md:gap-8 md:px-16 md:py-5 lg:px-28 lg:flex-row lg:justify-between">
+        <div className="flex flex-col gap-1 items-start flex-1">
+          <h1 className="text-lg md:text-xl lg:text-2xl">Exclusive</h1>
+          <h2 className="text-sm md:text-base lg:text-lg">Subscribe</h2>
+          <p className="text-xs md:text-sm lg:text-base">
+            Get 10% off that order
+          </p>
+          <div className="relative w-full max-w-xs">
+            <input
+              className="bg-black text-slate-400 border-2 border-slate-50 outline-none rounded-sm py-1 px-3 w-full"
+              placeholder="Enter your email"
+            />
+            <SendIcon className="absolute right-2 top-1/2 -translate-y-1/2 text-white" />
+          </div>
         </div>
-        </div>
+
         <div className="flex-1">
-          <h1 className='h11'>support</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, dolorum.</p>
-          <p>example@gmail.com</p>
-          <p>+1 (123) 456 7890</p>
+          <h1 className="text-lg md:text-xl lg:text-2xl">Support</h1>
+          <p className="text-xs md:text-sm lg:text-base">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias,
+            dolorum.
+          </p>
+          <p className="text-xs md:text-sm lg:text-base">example@gmail.com</p>
+          <p className="text-xs md:text-sm lg:text-base">+1 (123) 456 7890</p>
         </div>
+
         <div className="flex-1">
-          <h1 className='h11'>help</h1>
-        <ul>
-          <li>
-            <a href="">Home</a>
-          </li>
-          <li>
-            <a href="">Contact</a>
-          </li>
-          <li>
-            <a href="">About</a>
-          </li>
-          <li>
-            <a href="">Sign Up</a>
-          </li>
-        </ul>
+          <h1 className="text-lg md:text-xl lg:text-2xl">Help</h1>
+          <ul className="text-xs md:text-sm lg:text-base">
+            <li>
+              <a href="">Home</a>
+            </li>
+            <li>
+              <a href="">Contact</a>
+            </li>
+            <li>
+              <a href="">About</a>
+            </li>
+            <li>
+              <a href="">Sign Up</a>
+            </li>
+          </ul>
         </div>
+
         <div className="flex-1">
-          <h1 className='h11'>about</h1>
-        <ul>
-          <li>
-            <a href="">Home</a>
-          </li>
-          <li>
-            <a href="">Contact</a>
-          </li>
-          <li>
-            <a href="">About</a>
-          </li>
-          <li>
-            <a href="">Sign Up</a>
-          </li>
-        </ul>
+          <h1 className="text-lg md:text-xl lg:text-2xl">About</h1>
+          <ul className="text-xs md:text-sm lg:text-base">
+            <li>
+              <a href="">Home</a>
+            </li>
+            <li>
+              <a href="">Contact</a>
+            </li>
+            <li>
+              <a href="">About</a>
+            </li>
+            <li>
+              <a href="">Sign Up</a>
+            </li>
+          </ul>
         </div>
+
         <div className="flex-1">
-          <h1 className='h11'>download app</h1>
-          <p className='text-gray-500'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias, dolorum.</p>
-          <div className="">
-            <img src="" alt="" />
-            <div className="">
-              <img src="" alt="" />
-              <img src="" alt="" />
+          <h1 className="text-lg md:text-xl lg:text-2xl">Download App</h1>
+          <p className="text-gray-500 text-xs md:text-sm lg:text-base">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias,
+            dolorum.
+          </p>
+          <div className="flex flex-col items-start">
+            <img src="" alt="" className="w-24 h-auto lg:w-32" />
+            <div className="flex gap-2">
+              <img src="" alt="" className="w-12 h-auto lg:w-16" />
+              <img src="" alt="" className="w-12 h-auto lg:w-16" />
             </div>
-            <ul className='flex gap-2'>
-              <li><FacebookIcon /></li>
-              <li><InstagramIcon /></li>
-              <li><LinkedInIcon /></li>
+            <ul className="flex gap-2 mt-2">
+              <li>
+                <FacebookIcon />
+              </li>
+              <li>
+                <InstagramIcon />
+              </li>
+              <li>
+                <LinkedInIcon />
+              </li>
             </ul>
           </div>
         </div>
-        </div>
-        <hr />
-        <div className="py-5 text-center bg-black text-white">
-            <p className="text-center">© 2024 Exclusive</p>
-        </div>
       </div>
-    </>
+
+      <hr className="my-4" />
+      <div className="py-5 text-center bg-black text-white">
+        <p className="text-xs md:text-sm lg:text-base">© 2024 Exclusive</p>
+      </div>
+    </div>
   );
 };
 

@@ -21,56 +21,45 @@ const Section1 = () => {
   const goToSlide = (index) => {
     setCurrentIndex(index);
   };
+
+  // const prevSlide = () => {
+  //   setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  // };
+
+  // const nextSlide = () => {
+  //   setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  // };
+
   return (
-    <div className="flex gap-10 items-start mx-28">
-      <div className="w-2/12 border-r-2 border-slate-300">
+    <div className="flex gap-10 item-start sm:mx-6 lg:mx-28 flex-col lg:flex-row">
+      <div className="w-1/2 lg:w-2/12 lg:m-0 m-auto lg:border-r-2 lg:border-slate-300">
         <ul className="">
-          <li className="flex justify-between">
-            <a href="#">lorem-lorem</a>
-            <ChevronRightIcon />
-          </li>
-          <li className="flex justify-between">
-            <a href="#">lorem-lorem</a>
-            <ChevronRightIcon />
-          </li>
-          <li>
-            <a href="#">lorem-lorem</a>
-          </li>
-          <li>
-            <a href="#">lorem-lorem</a>
-          </li>
-          <li>
-            <a href="#">lorem-lorem</a>
-          </li>
-          <li>
-            <a href="#">lorem-lorem</a>
-          </li>
-          <li>
-            <a href="#">lorem-lorem</a>
-          </li>
-          <li>
-            <a href="#">lorem-lorem</a>
-          </li>
-          <li>
-            <a href="#">lorem-lorem</a>
-          </li>
-          <li>
-            <a href="#">lorem-lorem</a>
-          </li>
-          <li>
-            <a href="#">lorem-lorem</a>
-          </li>
+        <li className="flex justify-between">
+              <a href="#">lorem-lorem</a>
+              <ChevronRightIcon />
+            </li>
+            <li className="flex justify-between">
+              <a href="#">lorem-lorem</a>
+              <ChevronRightIcon />
+            </li>
+          {Array(11).fill("lorem-lorem").map((item, index) => (
+            <li key={index} className="flex justify-between">
+              <a href="#">{item}</a>
+            </li>
+          ))}
         </ul>
       </div>
       <div className="flex overflow-hidden relative w-6/12 mt-10 mx-auto">
+        {/* <button onClick={prevSlide} className="absolute left-0 z-10 bg-white p-2 rounded-full">{"<"}</button> */}
         <div
           className="flex transition-transform ease-in-out duration-500"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {images.map((img, index) => (
-            <img key={index} src={img} alt="" className="w-full h-auto" />
+            <img key={index} src={img} alt={`Slide ${index}`} className="w-full h-auto" />
           ))}
         </div>
+        {/* <button onClick={nextSlide} className="absolute right-0 z-10 bg-white p-2 rounded-full">{">"}</button> */}
 
         <div className="flex gap-3 items-center justify-center absolute bottom-2 left-1/2 -translate-x-1/2">
           {images.map((_, index) => (

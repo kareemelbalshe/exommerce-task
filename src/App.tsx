@@ -1,10 +1,15 @@
-import { createBrowserRouter, RouterProvider, Route, Outlet } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Outlet,
+} from "react-router-dom";
 import Header from "./components/header/Header";
 import UpHeader from "./components/header/UpHeader";
 import Footer from "./components/footer/Footer";
 import Home from "./pages/home/Home";
 import Contact from "./pages/contact/Contact";
-import SignUp from './pages/auth/SignUp';
+import SignUp from "./pages/auth/SignUp";
 import NotFound from "./pages/not-found/NotFound";
 import About from "./pages/about/About";
 import Cart from "./pages/cart/Cart";
@@ -19,16 +24,16 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        index: true, 
+        index: true,
         element: <Home />,
       },
       {
-        path: "contact", 
+        path: "contact",
         element: <Contact />,
       },
       {
         path: "signup",
-        element: <SignUp/>
+        element: <SignUp />,
       },
       {
         path: "login",
