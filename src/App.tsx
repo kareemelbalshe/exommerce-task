@@ -17,6 +17,7 @@ import Account from "./pages/account/Account";
 import ProductDetails from "./pages/product-details/ProductDetails";
 import CheckOut from "./pages/check-out/CheckOut";
 import Login from "./pages/auth/Login";
+import WishList from "./pages/wish-list/WishList";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
         element: <CheckOut />,
       },
       {
+        path: "wish-list",
+        element: <WishList />,
+      },
+      {
         path: "*",
         element: <NotFound />,
       },
@@ -73,7 +78,6 @@ function Layout() {
       <UpHeader />
       <Header />
       <div className="content">
-        {/* Outlet سيعرض المحتوى بناءً على المسار */}
         <Outlet />
       </div>
       <Footer />

@@ -2,35 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
-    input{
-        @apply outline-none
-    }
+@layer base {
+  input {
+    @apply outline-none;
+  }
 }
-@layer components{
-    .h11{
-        @apply text-xl;
-    }
-    .btn{
-        @apply py-5 px-10 w-fit bg-red-500 text-white rounded-md;
-    }
-    .hide-scrollbar {
-        @apply overflow-x-auto;
-      }
-      
-      /* إخفاء شريط التمرير */
-      .hide-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-      
-      .hide-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-}
-@media only screen and (max-width:1024px) {
-    
-}
-@media only screen and (max-width:768px) {
+@layer components {
+  .h11 {
+    @apply text-xl;
+  }
+  .btn {
+    @apply py-3 px-10 w-fit bg-red-500 text-white rounded-md;
+  }
+  .btn1 {
+    @apply py-3 px-10 w-fit border-[1px] border-gray-600 rounded-md;
+  }
+  .hide-scrollbar {
+    @apply overflow-x-auto;
+  }
 
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+@media only screen and (max-width: 1024px) {
+}
+@media only screen and (max-width: 768px) {
 }

@@ -33,7 +33,7 @@ const Section1 = () => {
   return (
     <div className="flex gap-10 item-start sm:mx-6 lg:mx-28 flex-col lg:flex-row">
       <div className="w-1/2 lg:w-2/12 lg:m-0 m-auto lg:border-r-2 lg:border-slate-300">
-        <ul className="">
+        <ul className="mt-10">
         <li className="flex justify-between">
               <a href="#">lorem-lorem</a>
               <ChevronRightIcon />
