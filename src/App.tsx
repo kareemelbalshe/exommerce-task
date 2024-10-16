@@ -18,6 +18,7 @@ import ProductDetails from "./pages/product-details/ProductDetails";
 import CheckOut from "./pages/check-out/CheckOut";
 import Login from "./pages/auth/Login";
 import WishList from "./pages/wish-list/WishList";
+import Look from "./pages/look/Look";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: "wish-list",
         element: <WishList />,
+      },
+      {
+        path: "look",
+        element: <Look />,
       },
       {
         path: "*",

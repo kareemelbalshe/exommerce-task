@@ -3,7 +3,7 @@ import img1 from "../../assets/img/wallpaperflare.com_wallpaper (1).jpg";
 
 const Login = () => {
   return (
-    <div className="mt-16 mb-32 flex justify-center items-center">
+    <div className="mt-16 mb-32 flex justify-center items-center  flex-col gap-6 lg:gap-0 lg:flex-row">
       <img className="w-1/2 h-auto" src={img1} alt="" />
       <div className="w-1/2 flex items-start flex-col mx-20">
         <h1 className="h11">Login to your account</h1>

@@ -5,6 +5,7 @@ import img2 from "../../assets/img/wallpaperflare.com_wallpaper (4).jpg";
 import img3 from "../../assets/img/wallpaperflare.com_wallpaper (5).jpg";
 import img4 from "../../assets/img/wallpaperflare.com_wallpaper (6).jpg";
 import img5 from "../../assets/img/wallpaperflare.com_wallpaper (9).jpg";
+import { Link } from "react-router-dom";
 
 const Section1 = () => {
   const images = [img1, img2, img3, img4, img5];
@@ -35,16 +36,16 @@ const Section1 = () => {
       <div className="w-1/2 lg:w-2/12 lg:m-0 m-auto lg:border-r-2 lg:border-slate-300">
         <ul className="mt-10">
         <li className="flex justify-between">
-              <a href="#">lorem-lorem</a>
+              <Link to="/look">lorem-lorem</Link>
               <ChevronRightIcon />
             </li>
             <li className="flex justify-between">
-              <a href="#">lorem-lorem</a>
+              <Link to="/look">lorem-lorem</Link>
               <ChevronRightIcon />
             </li>
           {Array(11).fill("lorem-lorem").map((item, index) => (
             <li key={index} className="flex justify-between">
-              <a href="#">{item}</a>
+              <Link to="/look">{item}</Link>
             </li>
           ))}
         </ul>

@@ -9,10 +9,13 @@ import { Menu } from "@mui/icons-material";
 
 const Header = () => {
   const { products } = useSelector((state) => state.cart);
+  const { wishList } = useSelector((state) => state.wishList);
 
   const [user, setUser] = useState(true);
   const [active, setActive] = useState(false);
-  const [num, setNum] = useState(products.length);
+  const [num, setNum] = useState(0); // تعيين 0 كقيمة افتراضية
+  const [num2, setNum2] = useState(0); // تعيين 0 كقيمة افتراضية
+  
   const location = useLocation();
   const [word, setWord] = useState(location.pathname.slice(1));
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,8 +25,16 @@ const Header = () => {
   }, [location]);
 
   useEffect(() => {
-    setNum(products.length);
+    if (products) {
+      setNum(products.length);
+    }
   }, [products]);
+  
+  useEffect(() => {
+    if (wishList) {
+      setNum2(wishList.length);
+    }
+  }, [wishList]);
 
   return (
     <div className="flex flex-col lg:flex-row items-center justify-between mt-10 pb-5 px-6 lg:px-28 border-b-2 border-b-slate-300">
@@ -80,8 +91,13 @@ const Header = () => {
 
         {/* Icons */}
         <div className="flex w-[100px] items-center justify-between mt-2 lg:mt-0">
-          <Link to="/wish-list">
+          <Link className="relative" to="/wish-list">
             <FavoriteBorderIcon className="cursor-pointer hover:text-red-500 transition duration-200" />
+            {num2 > 0 && (
+              <span className="absolute bg-red-500 text-sm flex items-center justify-center rounded-full h-5 w-5 top-[-40%] right-[-40%] text-white">
+                {num2}
+              </span>
+            )}
           </Link>
           <Link className="relative" to="/cart">
             {num > 0 && (

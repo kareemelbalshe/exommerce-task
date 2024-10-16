@@ -29,7 +29,7 @@ const Section2 = () => {
         <span className="w-5 h-10 bg-red-500 rounded-md"></span> Today's
       </h3>
       <div className="flex gap-5 flex-col md:flex-row">
-        <h1 className="w-max text-2xl md:text-3xl lg:text-4xl font-bold">Flash Sale</h1>
+        <h1 className="w-[200px] text-2xl md:text-3xl lg:text-4xl font-bold">Flash Sale</h1>
         <div className="flex items-center justify-between flex-col md:flex-row gap-10 w-full md:pr-20 lg:pr-28">
           <div className="flex justify-center items-end gap-5 lg:gap-10">
             <div className="">

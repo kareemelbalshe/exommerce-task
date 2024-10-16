@@ -1,13 +1,16 @@
 import StarRating from "./StarRating";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite"; // استيراد الأيقونة المفضلة
 import { useFetch } from "../../hooks/useFetch";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux"; // أضف useSelector
 import { cartAction } from "../rtk/slices/cart-slice";
+import { wishListAction } from "../rtk/slices/love-slice";
 
 export default function ProductSlider({ click, setClick }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { wishList } = useSelector((state) => state.wishList); // الحصول على قائمة الأمنيات
 
   useEffect(() => {
     if (click === "left") {
@@ -26,6 +29,7 @@ export default function ProductSlider({ click, setClick }) {
   const truncate = (str, maxLength) => {
     return str.length > maxLength ? str.substring(0, maxLength) + "..." : str;
   };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -43,6 +47,10 @@ export default function ProductSlider({ click, setClick }) {
     setClick("");
   };
 
+  const isInWishlist = (item) => {
+    return wishList.some((wishlistItem) => wishlistItem.id === item.id);
+  };
+
   return (
     <div className="flex gap-5 items-start my-10 overflow-x-scroll hide-scrollbar">
       {data
@@ -51,11 +59,27 @@ export default function ProductSlider({ click, setClick }) {
           <div className="flex gap-2 items-start flex-col" key={index}>
             <div className="w-60 h-60 flex justify-center items-center bg-gray-300 relative overflow-hidden group">
               <img className="w-16" src={item.image} alt="" />
-              <FavoriteBorderIcon className="absolute right-2 top-4" />
+
+              {/* التحقق من حالة المنتج في قائمة الأمنيات */}
+              {isInWishlist(item) ? (
+                <FavoriteIcon
+                  onClick={() => dispatch(wishListAction.addToWishList(item))}
+                  className="absolute right-2 top-4 cursor-pointer text-red-500"
+                />
+              ) : (
+                <FavoriteBorderIcon
+                  onClick={() => dispatch(wishListAction.addToWishList(item))}
+                  className="absolute right-2 top-4 cursor-pointer"
+                />
+              )}
+
               <RemoveRedEyeIcon className="absolute right-2 top-12" />
 
               <button
-                onClick={async() => await dispatch(cartAction.addToCart(item))}
+                onClick={() => {
+                  dispatch(cartAction.addToCart(item));
+                  alert(`product has been added to the cart!`);
+                }}
                 className="absolute bottom-[-100%] w-full bg-black text-white p-2 transition-all duration-300 group-hover:bottom-0"
               >
                 Add to Cart

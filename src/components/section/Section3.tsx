@@ -9,7 +9,7 @@ const Section3 = () => {
       <h3 className="flex gap-1 justify-start items-center text-red-500">
         <span className="w-5 h-10 bg-red-500 rounded-md"></span> Categories
       </h3>
-      <div className="flex flex-col md:flex-row gap-5 items-center justify-between">
+      <div className="flex flex-col md:flex-row gap-5 items-start justify-between">
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">
           Browse by category
         </h1>

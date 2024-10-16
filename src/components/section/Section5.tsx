@@ -11,7 +11,7 @@ const Section5 = () => {
         <span className="w-5 h-10 bg-red-500 rounded-md"></span> Our products
       </h3>
       
-      <div className="flex flex-col md:flex-row gap-5 justify-between items-center md:pr-16 lg:pr-28">
+      <div className="flex flex-col md:flex-row gap-5 justify-between items-start md:pr-16 lg:pr-28">
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">Explore our products</h1>
         
         {/* أزرار التنقل */}
