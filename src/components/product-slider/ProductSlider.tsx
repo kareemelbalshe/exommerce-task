@@ -35,14 +35,14 @@ export default function ProductSlider({ click, setClick }) {
 
   const goNext = () => {
     setCurrentIndex(
-      (prevIndex) => (prevIndex + 1) % data.length // الانتقال للصورة التالية مع التأكد من عدم تجاوز العدد
+      (prevIndex) => (prevIndex + 1) % data.length
     );
     setClick("");
   };
 
   const goPrev = () => {
     setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + data.length) % data.length // الانتقال للصورة السابقة مع الالتفاف إلى النهاية
+      (prevIndex) => (prevIndex - 1 + data.length) % data.length 
     );
     setClick("");
   };
@@ -57,8 +57,8 @@ export default function ProductSlider({ click, setClick }) {
         .slice(currentIndex, currentIndex + data.length)
         .map((item, index) => (
           <div className="flex gap-2 items-start flex-col" key={index}>
-            <div className="w-60 h-60 flex justify-center items-center bg-gray-300 relative overflow-hidden group">
-              <img className="w-16" src={item.image} alt="" />
+            <div className="w-60 h-60 flex justify-center items-center relative overflow-hidden group">
+              <img className="w-32" src={item.image} alt="" />
 
               {/* التحقق من حالة المنتج في قائمة الأمنيات */}
               {isInWishlist(item) ? (

@@ -6,6 +6,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import CountUp from "react-countup"; // استيراد مكتبة CountUp
 import { useFetch } from "../../hooks/useFetch";
+import SectionLow from '../../components/section/SectionLow';
 
 const arr = [
   {
@@ -37,6 +38,12 @@ const About = () => {
   const { data, loading, error } = useFetch(url);
 
   useEffect(() => {
+    setTimeout(() => {
+      setCurrentIndex(1);
+    }, 3000); // تغيير العنصر كل 3 ثوانٍ
+  }, []);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       goToNext();
     }, 3000); // تغيير العنصر كل 3 ثوانٍ
@@ -45,7 +52,11 @@ const About = () => {
 
   // الانتقال إلى الشريحة التالية
   const goToNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % data?.length);
+    if (currentIndex < data.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    } else {
+      setCurrentIndex(0); // العودة إلى الشريحة الأولى بعد الدورة
+    }
   };
 
   // الانتقال إلى شريحة محددة بالضغط على span
@@ -53,9 +64,18 @@ const About = () => {
     setCurrentIndex(index);
   };
 
+  // حساب ما يتم عرضه حاليًا (3 عناصر)
+  const visibleItems = () => {
+    if (currentIndex + 3 <= data.length) {
+      return data.slice(currentIndex, currentIndex + 3);
+    } else {
+      // إذا كان العدد أقل من 3 نحتاج إلى الالتفاف
+      return [...data.slice(currentIndex, data.length), ...data.slice(0, (currentIndex + 3) % data.length)];
+    }
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
-
 
   return (
     <div className="">
@@ -91,37 +111,37 @@ const About = () => {
           </div>
         ))}
       </div>
-      <div className="relative">
-      <div className="flex items-center justify-between gap-10 mt-20 flex-row sm:mx-6 lg:mx-28 overflow-hidden">
-        {data
-          .slice(currentIndex, currentIndex + 3) // عرض 3 عناصر في كل مرة
-          .map((item, index) => (
-            <div className="w-60 bg-gray-200 p-4 rounded-lg" key={index}>
-              <h1 className="text-xl font-bold">{item.username}</h1>
-              <p>{item.email}</p>
-              <p>{item.phone}</p>
-            </div>
-          ))}
+      <div className="relative mb-20 sm:mx-6 lg:mx-28">
+      <div className="flex items-center justify-center gap-10 mt-20 mb-40 flex-row sm:mx-6 lg:mx-28 overflow-hidden">
+        {visibleItems().map((item, index) => (
+          <div
+            className="w-60 bg-gray-200 p-6 rounded-lg shadow-lg transition-transform duration-300 transform hover:scale-105"
+            key={index}
+          >
+            <h1 className="text-xl font-bold text-center">{item.username}</h1>
+            <p className="text-center text-gray-600">{item.email}</p>
+            <p className="text-center text-gray-600">{item.phone}</p>
+          </div>
+        ))}
       </div>
 
       {/* الدوائر للتنقل بين الشرائح */}
-      <div className="flex gap-3 items-center justify-center absolute bottom-2 left-1/2 -translate-x-1/2">
-        {Array(5) // خمس دوائر للتحكم في التنقل
-          .fill()
-          .map((_, index) => (
-            <span
-              key={index}
-              className={`w-3 h-3 rounded-full cursor-pointer transition-all duration-300 ${
-                currentIndex === index
-                  ? "bg-red-600 border-2 border-slate-500 scale-125" // الشكل النشط مع تأثير تكبير
-                  : "bg-gray-400"
-              }`}
-              onClick={() => goToSlide(index)}
-            ></span>
-          ))}
+      <div className="flex gap-3 items-center justify-center absolute bottom-[58%] left-1/2 -translate-x-1/2">
+        {Array.from({ length: data.length }).map((_, index) => (
+          <span
+            key={index}
+            className={`w-4 h-4 rounded-full cursor-pointer transition-all duration-300 ${
+              currentIndex === index
+                ? "bg-red-600 border-2 border-slate-500 scale-125" // الشكل النشط مع تأثير تكبير
+                : "bg-gray-400"
+            }`}
+            onClick={() => goToSlide(index)}
+          ></span>
+        ))}
       </div>
+      <SectionLow/>
     </div>
-      
+    
     </div>
   );
 };
