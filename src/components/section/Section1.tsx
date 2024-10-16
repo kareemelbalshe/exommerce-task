@@ -6,6 +6,7 @@ import img3 from "../../assets/img/wallpaperflare.com_wallpaper (5).jpg";
 import img4 from "../../assets/img/wallpaperflare.com_wallpaper (6).jpg";
 import img5 from "../../assets/img/wallpaperflare.com_wallpaper (9).jpg";
 import { Link } from "react-router-dom";
+import { useFetch } from "../../lib/hooks/useFetch";
 
 const Section1 = () => {
   const images = [img1, img2, img3, img4, img5];
@@ -22,6 +23,9 @@ const Section1 = () => {
   const goToSlide = (index) => {
     setCurrentIndex(index);
   };
+  const { data, loading, error } = useFetch(
+    `https://fakestoreapi.com/products/categories`
+  );
 
   // const prevSlide = () => {
   //   setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
@@ -32,7 +36,7 @@ const Section1 = () => {
   // };
 
   return (
-    <div className="flex gap-10 item-start sm:mx-6 lg:mx-28 flex-col lg:flex-row">
+    <div className="flex gap-10 item-start mx-6 lg:mx-28 flex-col lg:flex-row">
       <div className="w-1/2 lg:w-2/12 lg:m-0 m-auto lg:border-r-2 lg:border-slate-300">
         <ul className="mt-10">
         <li className="flex justify-between">
@@ -43,9 +47,9 @@ const Section1 = () => {
               <Link to="/look">lorem-lorem</Link>
               <ChevronRightIcon />
             </li>
-          {Array(11).fill("lorem-lorem").map((item, index) => (
+          {data?.map((item, index) => (
             <li key={index} className="flex justify-between">
-              <Link to="/look">{item}</Link>
+              <Link to={`/category/${item}`}>{item}</Link>
             </li>
           ))}
         </ul>

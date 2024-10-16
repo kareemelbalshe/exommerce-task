@@ -97,22 +97,22 @@ const Header = () => {
         } translate-y-0`}
       >
         <li>
-          <Link className={word === "" ? "underline" : ""} to="/">
+          <Link onClick={()=>setIsMenuOpen(false)} className={word === "" ? "underline" : ""} to="/">
             Home
           </Link>
         </li>
         <li>
-          <Link className={word === "contact" ? "underline" : ""} to="/contact">
+          <Link onClick={()=>setIsMenuOpen(false)} className={word === "contact" ? "underline" : ""} to="/contact">
             Contact
           </Link>
         </li>
         <li>
-          <Link className={word === "about" ? "underline" : ""} to="/about">
+          <Link onClick={()=>setIsMenuOpen(false)} className={word === "about" ? "underline" : ""} to="/about">
             About
           </Link>
         </li>
         <li>
-          <Link className={word === "signup" ? "underline" : ""} to="/signup">
+          <Link onClick={()=>setIsMenuOpen(false)} className={word === "signup" ? "underline" : ""} to="/signup">
             Sign Up
           </Link>
         </li>

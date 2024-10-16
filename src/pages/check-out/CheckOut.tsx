@@ -1,16 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 const CheckOut = () => {
   const inp = ["name", "z", "s", "cb", "gvj", "klk"];
   const { products } = useSelector((state) => state.cart);
 
+  const [inputValues, setInputValues] = useState(Array(inp.length).fill("")); // للحفاظ على القيم
+  const [errors, setErrors] = useState(Array(inp.length).fill("")); // للحفاظ على الأخطاء
+
+  const handleChange = (index, e) => {
+    const value = e.target.value;
+
+    // Regular expression to allow only Arabic and English letters
+    const regex = /^[a-zA-Z\u0600-\u06FF ]*$/;
+
+    let updatedValues = [...inputValues];
+    updatedValues[index] = value;
+
+    setInputValues(updatedValues);
+
+    let updatedErrors = [...errors];
+
+    if (regex.test(value)) {
+      updatedErrors[index] = ""; // No error if valid
+    } else {
+      updatedErrors[index] = "Please enter only Arabic or English letters."; // Error message
+    }
+
+    setErrors(updatedErrors);
+  };
   return (
     <div className="flex my-16 gap-20 flex-col lg:flex-row justify-between items-start sm:mx-6 lg:mx-28">
       <div className="flex-1 flex flex-col gap-3">
         <h1 className="h11">billing details</h1>
         {inp.map((string, index) => (
-          <div key={index} className=" flex flex-col">
+          <div key={index} className="flex flex-col mb-4">
             <label htmlFor={string} className="text-gray-400">
               {string}
               <span className="text-red-700">*</span>
@@ -19,7 +43,12 @@ const CheckOut = () => {
               className="bg-gray-300 border-none outline-none pl-5 pr-14 py-2 rounded-md"
               type="text"
               id={string}
+              value={inputValues[index]}
+              onChange={(e) => handleChange(index, e)}
             />
+            {errors[index] && (
+              <p style={{ color: "red", marginTop: "5px" }}>{errors[index]}</p>
+            )}
           </div>
         ))}
         <div className="">

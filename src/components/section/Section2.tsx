@@ -69,7 +69,7 @@ const Section2 = () => {
         </div>
       </div>
 
-      <ProductSlider click={click} setClick={setClick} />
+      <ProductSlider url={`https://fakestoreapi.com/products`} click={click} setClick={setClick} />
       <div className="flex items-center justify-center">
         <button className="btn">View All products</button>
       </div>

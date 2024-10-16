@@ -19,6 +19,7 @@ import CheckOut from "./pages/check-out/CheckOut";
 import Login from "./pages/auth/Login";
 import WishList from "./pages/wish-list/WishList";
 import Look from "./pages/look/Look";
+import ProductByCategory from "./pages/product-by-category/ProductByCategory";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "product/:productId",
         element: <ProductDetails />,
+      },
+      {
+        path: "category/:categoryId",
+        element: <ProductByCategory />,
       },
       {
         path: "checkout",

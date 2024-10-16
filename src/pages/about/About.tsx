@@ -5,8 +5,8 @@ import StarIcon from "@mui/icons-material/Star";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import CountUp from "react-countup"; // استيراد مكتبة CountUp
-import { useFetch } from "../../hooks/useFetch";
-import SectionLow from '../../components/section/SectionLow';
+import { useFetch } from "../../lib/hooks/useFetch";
+import SectionLow from "../../components/section/SectionLow";
 
 const arr = [
   {
@@ -70,7 +70,10 @@ const About = () => {
       return data.slice(currentIndex, currentIndex + 3);
     } else {
       // إذا كان العدد أقل من 3 نحتاج إلى الالتفاف
-      return [...data.slice(currentIndex, data.length), ...data.slice(0, (currentIndex + 3) % data.length)];
+      return [
+        ...data.slice(currentIndex, data.length),
+        ...data.slice(0, (currentIndex + 3) % data.length),
+      ];
     }
   };
 
@@ -111,37 +114,36 @@ const About = () => {
           </div>
         ))}
       </div>
-      <div className="relative mb-20 sm:mx-6 lg:mx-28">
-      <div className="flex items-center justify-center gap-10 mt-20 mb-40 flex-row sm:mx-6 lg:mx-28 overflow-hidden">
-        {visibleItems().map((item, index) => (
-          <div
-            className="w-60 bg-gray-200 p-6 rounded-lg shadow-lg transition-transform duration-300 transform hover:scale-105"
-            key={index}
-          >
-            <h1 className="text-xl font-bold text-center">{item.username}</h1>
-            <p className="text-center text-gray-600">{item.email}</p>
-            <p className="text-center text-gray-600">{item.phone}</p>
-          </div>
-        ))}
-      </div>
+      <div className="lg:mx-28 mb-20">
+        <div className="flex items-center justify-center gap-10 mt-20 flex-row lg:mx-28 overflow-hidden">
+          {visibleItems().map((item, index) => (
+            <div
+              className="bg-gray-100 p-6 rounded-md w-[200px]"
+              key={index}
+            >
+              <h1 className="text-xl font-bold text-center">{item.username}</h1>
+              <p className="text-center text-gray-600">{item.email}</p>
+              <p className="text-center text-gray-600">{item.phone}</p>
+            </div>
+          ))}
+        </div>
 
-      {/* الدوائر للتنقل بين الشرائح */}
-      <div className="flex gap-3 items-center justify-center absolute bottom-[58%] left-1/2 -translate-x-1/2">
-        {Array.from({ length: data.length }).map((_, index) => (
-          <span
-            key={index}
-            className={`w-4 h-4 rounded-full cursor-pointer transition-all duration-300 ${
-              currentIndex === index
-                ? "bg-red-600 border-2 border-slate-500 scale-125" // الشكل النشط مع تأثير تكبير
-                : "bg-gray-400"
-            }`}
-            onClick={() => goToSlide(index)}
-          ></span>
-        ))}
+        {/* الدوائر للتنقل بين الشرائح */}
+        <div className="flex gap-3 mt-10 mb-20 items-center justify-center m-auto">
+          {Array.from({ length: data.length }).map((_, index) => (
+            <span
+              key={index}
+              className={`w-4 h-4 rounded-full cursor-pointer transition-all duration-300 ${
+                currentIndex === index
+                  ? "bg-red-600 border-2 border-slate-500 scale-125" // الشكل النشط مع تأثير تكبير
+                  : "bg-gray-400"
+              }`}
+              onClick={() => goToSlide(index)}
+            ></span>
+          ))}
+        </div>
+        <SectionLow />
       </div>
-      <SectionLow/>
-    </div>
-    
     </div>
   );
 };

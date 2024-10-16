@@ -23,7 +23,7 @@ const Section4 = () => {
       </div>
 
       {/* عرض المنتجات (Slider) */}
-      <ProductSlider />
+      <ProductSlider url={`https://fakestoreapi.com/products/category/jewelery`} />
     </div>
   );
 };

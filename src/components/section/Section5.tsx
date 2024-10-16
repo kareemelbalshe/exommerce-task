@@ -26,8 +26,8 @@ const Section5 = () => {
       </div>
 
       {/* عرض المنتجات (Slider) */}
-      <ProductSlider />
-      <ProductSlider />
+      <ProductSlider url={`https://fakestoreapi.com/products/category/electronics`} />
+      <ProductSlider url={`https://fakestoreapi.com/products/category/men's clothing`} />
 
       {/* زر عرض جميع المنتجات */}
       <div className="flex items-center justify-center mt-8">

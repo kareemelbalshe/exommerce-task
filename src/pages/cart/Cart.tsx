@@ -9,7 +9,7 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="overflow-x-auto sm:mx-6 lg:mx-28">
+    <div className="mx-6 lg:mx-28">
       <table className="min-w-full bg-white rounded-lg my-10">
         <thead>
           <tr className="flex items-center justify-between shadow-md rounded-md border-b border-gray-200 py-3 px-4">
@@ -36,6 +36,7 @@ const Cart = () => {
                   className="w-11 border-[1px] rounded-md pl-1 border-gray-400"
                   value={product.quantity}
                   onChange={(e) =>
+                    Number(e.target.value) > 0 &&
                     dispatch(
                       cartAction.updateQuantity({
                         id: product.id,
@@ -66,16 +67,16 @@ const Cart = () => {
         </button>
         <button className="btn1">update cart</button>
       </div>
-      <div className="flex w-[100%] items-center justify-between mb-20">
-        <div className="">
+      <div className="flex flex-col lg:flex-row gap-5 w-[100%] items-start justify-between mb-20">
+        <div className="flex flex-col lg:flex-row gap-5">
           <input
             type="text"
             placeholder="coupon code"
-            className="py-3 px-7 border-[1px] border-gray-800 rounded-md mr-5"
+            className="py-3 px-7 border-[1px] border-gray-800 rounded-md"
           />
           <button className="btn">apply coupon</button>
         </div>
-        <div className="flex flex-col gap-3 w-[400px] px-3 py-4 border-[1px] border-gray-800 rounded-md ">
+        <div className="flex flex-col gap-3 lg:w-[400px] px-3 py-4 border-[1px] border-gray-800 rounded-md ">
           <h1 className="h11">cart total</h1>
           <div className="flex items-center justify-between border-b-[1px] border-gray-400 py-2">
             <h2>subtotal</h2>
@@ -99,7 +100,9 @@ const Cart = () => {
                 .toFixed(2)}
             </p>
           </div>
-          <button onClick={()=>navigate("/checkout")} className="btn ml-16">process to checkout</button>
+          <button onClick={() => navigate("/checkout")} className="btn ml-16">
+            process to checkout
+          </button>
         </div>
       </div>
     </div>

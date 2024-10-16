@@ -9,9 +9,19 @@ export const cartSlice = createSlice({
     addToCart: (state, action) => {
       const findProduct = state.products.find(product => product.id === action.payload.id);
       if (findProduct) {
-        findProduct.quantity += 1;
+        if(action.payload.quantity>0){
+          findProduct.quantity+=action.payload.quantity;
+        }
+        else{
+          findProduct.quantity += 1;
+        }
       } else {
-        state.products.push({ ...action.payload, quantity: 1 });
+        if(action.payload.quantity>0){
+          state.products.push({ ...action.payload });
+        }
+        else{
+          state.products.push({ ...action.payload, quantity: 1 });
+        }
       }
       localStorage.setItem("products", JSON.stringify(state.products));
     },

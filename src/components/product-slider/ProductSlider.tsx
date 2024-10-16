@@ -2,33 +2,32 @@ import StarRating from "./StarRating";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite"; // استيراد الأيقونة المفضلة
-import { useFetch } from "../../hooks/useFetch";
+import { useFetch } from "../../lib/hooks/useFetch";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"; // أضف useSelector
 import { cartAction } from "../rtk/slices/cart-slice";
 import { wishListAction } from "../rtk/slices/love-slice";
+import { useNavigate } from "react-router-dom";
+import { truncate } from "../../lib/hooks/truncate";
 
-export default function ProductSlider({ click, setClick }) {
+export default function ProductSlider({ url, click, setClick }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { wishList } = useSelector((state) => state.wishList); // الحصول على قائمة الأمنيات
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     if (click === "left") {
+      if(currentIndex>=0)
       goPrev();
     } else if (click === "right") {
       goNext();
     }
   }, [click]);
 
-  const { data, loading, error } = useFetch(
-    "https://fakestoreapi.com/products"
-  );
+  const { data, loading, error } = useFetch(url);
 
   const dispatch = useDispatch();
-
-  const truncate = (str, maxLength) => {
-    return str.length > maxLength ? str.substring(0, maxLength) + "..." : str;
-  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -73,7 +72,7 @@ export default function ProductSlider({ click, setClick }) {
                 />
               )}
 
-              <RemoveRedEyeIcon className="absolute right-2 top-12" />
+              <RemoveRedEyeIcon onClick={()=>navigate(`/product/${item.id}`)} className="absolute right-2 top-12" />
 
               <button
                 onClick={() => {
