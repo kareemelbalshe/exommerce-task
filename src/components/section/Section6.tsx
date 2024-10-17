@@ -1,18 +1,18 @@
-import React from "react";
-import img1 from "../../assets/img/wallpaperflare.com_wallpaper (1).jpg";
-import img2 from "../../assets/img/wallpaperflare.com_wallpaper (4).jpg";
-import img3 from "../../assets/img/wallpaperflare.com_wallpaper (5).jpg";
-import img4 from "../../assets/img/wallpaperflare.com_wallpaper (6).jpg";
+import img1 from "/assets/img/wallpaperflare.com_wallpaper (1).jpg";
+import img2 from "/assets/img/wallpaperflare.com_wallpaper (4).jpg";
+import img3 from "/assets/img/wallpaperflare.com_wallpaper (5).jpg";
+import img4 from "/assets/img/wallpaperflare.com_wallpaper (6).jpg";
 import SectionLow from "./SectionLow";
 
 const Section6 = () => {
+
   return (
-    <div className="py-12 px-6 md:pl-20 lg:pl-28 lg:py-20 flex flex-col">
+    <div className={`py-12 px-6 md:px-20 lg:px-28 lg:py-20 flex flex-col m-auto`}>
       <h3 className="flex gap-1 justify-start items-center text-red-500">
         <span className="w-5 h-10 bg-red-500 rounded-md"></span> Featured
       </h3>
 
-      <div className="flex flex-col gap-5 items-start md:pr-16 lg:pr-28">
+      <div className="flex flex-col gap-5 items-start">
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">
           New arrivals
         </h1>

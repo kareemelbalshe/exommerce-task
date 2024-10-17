@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { cartAction } from "../../components/rtk/slices/cart-slice";
 import { useNavigate } from "react-router-dom";
+import { cartAction } from "../../lib/rtk/slices/cart-slice";
+import { RootState } from "../../lib/rtk/store";
+import { ProductQ } from "../../lib/types/types";
 
 const Cart = () => {
   const navigate = useNavigate();
-  const { products } = useSelector((state) => state.cart);
+  const { products } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
 
   return (
@@ -21,7 +22,7 @@ const Cart = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product, index) => (
+          {products.map((product: ProductQ, index: number) => (
             <tr
               key={index}
               className="flex flex-wrap items-center justify-between shadow-md my-3 bg-white rounded-md border-b border-gray-200 py-3 px-4 hover:bg-gray-50 transition duration-200"
@@ -83,7 +84,11 @@ const Cart = () => {
             <p className="">
               $
               {products
-                .reduce((acc, curr) => acc + curr.price * curr.quantity, 0)
+                .reduce(
+                  (acc: number, curr: ProductQ) =>
+                    acc + curr.price * curr.quantity,
+                  0
+                )
                 .toFixed(2)}
             </p>
           </div>
@@ -96,7 +101,11 @@ const Cart = () => {
             <p className="">
               $
               {products
-                .reduce((acc, curr) => acc + curr.price * curr.quantity, 0)
+                .reduce(
+                  (acc: number, curr: ProductQ) =>
+                    acc + curr.price * curr.quantity,
+                  0
+                )
                 .toFixed(2)}
             </p>
           </div>

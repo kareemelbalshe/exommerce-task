@@ -1,22 +1,24 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useFetch } from "../../lib/hooks/useFetch";
 import { useParams } from "react-router-dom";
 import StarRating from "../../components/product-slider/StarRating";
 import { useDispatch, useSelector } from "react-redux";
-import { cartAction } from "../../components/rtk/slices/cart-slice";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { wishListAction } from "../../components/rtk/slices/love-slice";
+import { cartAction } from "../../lib/rtk/slices/cart-slice";
+import { wishListAction } from "../../lib/rtk/slices/love-slice";
+import { RootState } from "../../lib/rtk/store";
+import { Product } from "../../lib/types/types";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
 
-  const { wishList } = useSelector((state) => state.wishList); // الحصول على قائمة الأمنيات
+  const { wishList } = useSelector((state: RootState) => state.wishList);
 
   const [num, setNum] = useState(0);
   const { productId } = useParams();
 
-  const { data, loading, error } = useFetch(
+  const { data, loading, error } = useFetch<Product>(
     `https://fakestoreapi.com/products/${productId}`
   );
 
@@ -28,8 +30,10 @@ const ProductDetails = () => {
     if (num > 0) setNum(num - 1);
   };
 
-  const isInWishlist = (item) => {
-    return wishList.some((wishlistItem) => wishlistItem.id === item.id);
+  const isInWishlist = (item: Product) => {
+    return wishList.some(
+      (wishlistItem: Product) => wishlistItem.id === item.id
+    );
   };
 
   if (loading) return <p>Loading...</p>;
@@ -85,13 +89,13 @@ const ProductDetails = () => {
             <FavoriteIcon
               onClick={() => dispatch(wishListAction.addToWishList(data))}
               className="cursor-pointer text-red-500 border-[1px] border-gray-500 rounded-sm p-1"
-              style={{fontSize:"35px"}}
+              style={{ fontSize: "35px" }}
             />
           ) : (
             <FavoriteBorderIcon
               onClick={() => dispatch(wishListAction.addToWishList(data))}
               className="cursor-pointer border-[1px] border-gray-500 rounded-sm p-1"
-              style={{fontSize:"35px"}}
+              style={{ fontSize: "35px" }}
             />
           )}
         </div>

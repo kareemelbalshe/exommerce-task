@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { cartAction } from "../../components/rtk/slices/cart-slice";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { wishListAction } from "../../components/rtk/slices/love-slice";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { truncate } from "../../lib/functions/truncate";
+import { Product } from "../../lib/types/types";
+import { wishListAction } from "../../lib/rtk/slices/love-slice";
+import { cartAction } from "../../lib/rtk/slices/cart-slice";
+import { RootState } from "../../lib/rtk/store";
 
 const WishList = () => {
-  const { wishList } = useSelector((state) => state.wishList);
+  const { wishList } = useSelector((state: RootState) => state?.wishList);
 
   const dispatch = useDispatch();
 
-  const truncate = (str, maxLength) => {
-    return str.length > maxLength ? str.substring(0, maxLength) + "..." : str;
-  };
-
-  const [num, setNum] = useState(0); // تعيين 0 كقيمة افتراضية
+  const [num, setNum] = useState(0);
 
   useEffect(() => {
     if (wishList) {
@@ -29,7 +28,7 @@ const WishList = () => {
         <button className="btn1">move all to bag</button>
       </div>
       <div className="flex gap-5 items-start flex-wrap my-5 overflow-x-scroll hide-scrollbar">
-        {wishList.map((item, index) => (
+        {wishList.map((item: Product, index: number) => (
           <div
             className="flex gap-2 m-auto lg:m-0 items-start flex-col"
             key={index}

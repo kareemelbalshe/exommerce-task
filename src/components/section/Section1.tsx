@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import img1 from "../../assets/img/wallpaperflare.com_wallpaper (1).jpg";
-import img2 from "../../assets/img/wallpaperflare.com_wallpaper (4).jpg";
-import img3 from "../../assets/img/wallpaperflare.com_wallpaper (5).jpg";
-import img4 from "../../assets/img/wallpaperflare.com_wallpaper (6).jpg";
-import img5 from "../../assets/img/wallpaperflare.com_wallpaper (9).jpg";
+import img1 from "/assets/img/wallpaperflare.com_wallpaper (1).jpg";
+import img2 from "/assets/img/wallpaperflare.com_wallpaper (4).jpg";
+import img3 from "/assets/img/wallpaperflare.com_wallpaper (5).jpg";
+import img4 from "/assets/img/wallpaperflare.com_wallpaper (6).jpg";
+import img5 from "/assets/img/wallpaperflare.com_wallpaper (9).jpg";
 import { Link } from "react-router-dom";
 import { useFetch } from "../../lib/hooks/useFetch";
+import { useLang } from "../../lib/hooks/useLang";
 
 const Section1 = () => {
   const images = [img1, img2, img3, img4, img5];
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const { isEn } = useLang();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,13 +23,16 @@ const Section1 = () => {
     return () => clearInterval(interval);
   }, [images.length]);
 
-  const goToSlide = (index) => {
+  const goToSlide = (index: number) => {
     setCurrentIndex(index);
   };
-  const { data, loading, error } = useFetch(
+
+  const { data, loading, error } = useFetch<string[]>(
     `https://fakestoreapi.com/products/categories`
   );
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
   // const prevSlide = () => {
   //   setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   // };
@@ -37,17 +43,21 @@ const Section1 = () => {
 
   return (
     <div className="flex gap-10 item-start mx-6 lg:mx-28 flex-col lg:flex-row">
-      <div className="w-1/2 lg:w-2/12 lg:m-0 m-auto lg:border-r-2 lg:border-slate-300">
+      <div
+        className={`w-1/2 lg:w-2/12 lg:m-0 m-auto ${
+          isEn ? "lg:border-r-2" : "lg:border-l-2"
+        }  lg:border-slate-300`}
+      >
         <ul className="mt-10">
-        <li className="flex justify-between">
-              <Link to="/look">lorem-lorem</Link>
-              <ChevronRightIcon />
-            </li>
-            <li className="flex justify-between">
-              <Link to="/look">lorem-lorem</Link>
-              <ChevronRightIcon />
-            </li>
-          {data?.map((item, index) => (
+          <li className="flex justify-between">
+            <Link to="/look">lorem-lorem</Link>
+            <ChevronRightIcon className={`${!isEn&&"rotate-180"}`} />
+          </li>
+          <li className="flex justify-between">
+            <Link to="/look">lorem-lorem</Link>
+            <ChevronRightIcon className={`${!isEn&&"rotate-180"}`} />
+          </li>
+          {data?.map((item: string, index: number) => (
             <li key={index} className="flex justify-between">
               <Link to={`/category/${item}`}>{item}</Link>
             </li>
@@ -58,10 +68,19 @@ const Section1 = () => {
         {/* <button onClick={prevSlide} className="absolute left-0 z-10 bg-white p-2 rounded-full">{"<"}</button> */}
         <div
           className="flex transition-transform ease-in-out duration-500"
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          style={{
+            transform: `${isEn ? "translateX(-" : "translateX("}${
+              currentIndex * 100
+            }%)`,
+          }}
         >
           {images.map((img, index) => (
-            <img key={index} src={img} alt={`Slide ${index}`} className="w-full h-auto" />
+            <img
+              key={index}
+              src={img}
+              alt={`Slide ${index}`}
+              className="w-full h-auto"
+            />
           ))}
         </div>
         {/* <button onClick={nextSlide} className="absolute right-0 z-10 bg-white p-2 rounded-full">{">"}</button> */}

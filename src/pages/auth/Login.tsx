@@ -1,5 +1,4 @@
-import React from "react";
-import img1 from "../../assets/img/wallpaperflare.com_wallpaper (1).jpg";
+import img1 from "/assets/img/wallpaperflare.com_wallpaper (1).jpg";
 
 const Login = () => {
   return (

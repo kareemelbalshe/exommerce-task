@@ -1,5 +1,4 @@
 import { Call, Send } from "@mui/icons-material";
-import React from "react";
 
 const Contact = () => {
   return (

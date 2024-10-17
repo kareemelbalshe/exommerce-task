@@ -1,34 +1,33 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
+import { RootState } from "../../lib/rtk/store";
+import { ProductQ } from "../../lib/types/types";
 
 const CheckOut = () => {
-  const inp = ["name", "z", "s", "cb", "gvj", "klk"];
-  const { products } = useSelector((state) => state.cart);
+  const inp: string[] = ["name", "z", "s", "cb", "gvj", "klk"];
+  const { products } = useSelector((state: RootState) => state.cart);
 
-  const [inputValues, setInputValues] = useState(Array(inp.length).fill("")); // للحفاظ على القيم
-  const [errors, setErrors] = useState(Array(inp.length).fill("")); // للحفاظ على الأخطاء
+  const [inputValues, setInputValues] = useState<string[]>(Array(inp.length).fill(""));
+  const [errors, setErrors] = useState<string[]>(Array(inp.length).fill(""));
 
-  const handleChange = (index, e) => {
+  const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    // Regular expression to allow only Arabic and English letters
     const regex = /^[a-zA-Z\u0600-\u06FF ]*$/;
 
-    let updatedValues = [...inputValues];
+    const updatedValues = [...inputValues];
     updatedValues[index] = value;
-
     setInputValues(updatedValues);
 
-    let updatedErrors = [...errors];
-
+    const updatedErrors = [...errors];
     if (regex.test(value)) {
-      updatedErrors[index] = ""; // No error if valid
+      updatedErrors[index] = "";
     } else {
-      updatedErrors[index] = "Please enter only Arabic or English letters."; // Error message
+      updatedErrors[index] = "Please enter only Arabic or English letters.";
     }
-
     setErrors(updatedErrors);
   };
+
   return (
     <div className="flex my-16 gap-20 flex-col lg:flex-row justify-between items-start sm:mx-6 lg:mx-28">
       <div className="flex-1 flex flex-col gap-3">
@@ -61,9 +60,10 @@ const CheckOut = () => {
           <label htmlFor="check">Lorem ipsum dolor sit amet.</label>
         </div>
       </div>
+
       <div className="flex-1">
         <div className="">
-          {products.map((product, index) => (
+          {products.map((product: ProductQ, index: number) => (
             <div
               key={index}
               className="flex my-2 gap-3 items-center justify-between"
@@ -75,21 +75,25 @@ const CheckOut = () => {
                 <p className="text-gray-400">
                   <span className="text-green-600 font-bold">
                     {product.quantity} pieces
-                  </span>
-                  {"   "}
-                  {product.price.toFixed(2) * product.quantity}$
+                  </span>{" "}
+                  {(product.price * product.quantity).toFixed(2)}$
                 </p>
               </div>
             </div>
           ))}
         </div>
+
         <div className="flex flex-col w-full py-4 rounded-md ">
           <div className="flex items-center justify-between border-b-[1px] border-gray-400 py-3">
             <h2>subtotal</h2>
             <p className="">
               $
               {products
-                .reduce((acc, curr) => acc + curr.price * curr.quantity, 0)
+                .reduce(
+                  (acc: number, curr: ProductQ) =>
+                    acc + curr.price * curr.quantity,
+                  0
+                )
                 .toFixed(2)}
             </p>
           </div>
@@ -102,11 +106,16 @@ const CheckOut = () => {
             <p className="">
               $
               {products
-                .reduce((acc, curr) => acc + curr.price * curr.quantity, 0)
+                .reduce(
+                  (acc: number, curr: ProductQ) =>
+                    acc + curr.price * curr.quantity,
+                  0
+                )
                 .toFixed(2)}
             </p>
           </div>
         </div>
+
         <div className="mb-5">
           <input
             type="text"
@@ -114,7 +123,7 @@ const CheckOut = () => {
             className="py-3 px-7 border-[1px] border-gray-800 rounded-md mr-5"
           />
           <button className="btn">apply coupon</button>
-        </div>{" "}
+        </div>
         <button className="btn">place order</button>
       </div>
     </div>

@@ -1,13 +1,14 @@
-import React from "react";
 import ProductSlider from "../../components/product-slider/ProductSlider";
 import { useParams } from "react-router-dom";
+import { useLang } from "../../lib/hooks/useLang";
 
 const ProductByCategory = () => {
   const { categoryId } = useParams();
+  const { isEn } = useLang();
 
   return (
-    <div className="ml-6 lg:ml-28">
-      <ProductSlider
+    <div className={`${isEn?"ml-6 lg:ml-28":"mr-6 lg:mr-28"}`}>
+      <ProductSlider click="" setClick={undefined}
         url={`https://fakestoreapi.com/products/category/${categoryId}`}
       />
     </div>

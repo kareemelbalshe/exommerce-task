@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import img1 from "../../assets/img/wallpaperflare.com_wallpaper (1).jpg";
-import ShopIcon from "@mui/icons-material/Shop"; // استبدل Shop بأي أيقونة تريدها
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
+import img1 from "/assets/img/wallpaperflare.com_wallpaper (1).jpg";
+import ShopIcon from "@mui/icons-material/Shop";
 import StarIcon from "@mui/icons-material/Star";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
-import CountUp from "react-countup"; // استيراد مكتبة CountUp
+import CountUp from "react-countup";
 import { useFetch } from "../../lib/hooks/useFetch";
 import SectionLow from "../../components/section/SectionLow";
 
@@ -40,36 +41,32 @@ const About = () => {
   useEffect(() => {
     setTimeout(() => {
       setCurrentIndex(1);
-    }, 3000); // تغيير العنصر كل 3 ثوانٍ
+    }, 3000); 
   }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       goToNext();
-    }, 3000); // تغيير العنصر كل 3 ثوانٍ
-    return () => clearInterval(interval); // تنظيف عند الخروج من الكومبوننت
+    }, 3000); 
+    return () => clearInterval(interval); 
   }, [currentIndex]);
 
-  // الانتقال إلى الشريحة التالية
   const goToNext = () => {
     if (currentIndex < data.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      setCurrentIndex(0); // العودة إلى الشريحة الأولى بعد الدورة
+      setCurrentIndex(0); 
     }
   };
 
-  // الانتقال إلى شريحة محددة بالضغط على span
-  const goToSlide = (index) => {
+  const goToSlide = (index:number) => {
     setCurrentIndex(index);
   };
 
-  // حساب ما يتم عرضه حاليًا (3 عناصر)
   const visibleItems = () => {
     if (currentIndex + 3 <= data.length) {
       return data.slice(currentIndex, currentIndex + 3);
     } else {
-      // إذا كان العدد أقل من 3 نحتاج إلى الالتفاف
       return [
         ...data.slice(currentIndex, data.length),
         ...data.slice(0, (currentIndex + 3) % data.length),
@@ -82,7 +79,7 @@ const About = () => {
 
   return (
     <div className="">
-      <div className="flex flex-col items-center justify-between gap-10 mt-20 lg:flex-row mx-6  lg:mx-0 lg:ml-28">
+      <div dir="ltr" className="flex flex-col items-center justify-between gap-10 mt-20 lg:flex-row mx-6  lg:mx-0 lg:ml-28">
         <div className="">
           <h1 className="text-6xl">Our story</h1>
           <p>
@@ -115,8 +112,8 @@ const About = () => {
         ))}
       </div>
       <div className="lg:mx-28 mb-20">
-        <div className="flex items-center justify-center gap-10 mt-20 flex-row lg:mx-28 overflow-hidden">
-          {visibleItems().map((item, index) => (
+        <div className="flex items-center flex-col justify-center gap-10 mt-20 lg:flex-row lg:mx-28 overflow-x-hidden">
+          {visibleItems().map((item, index: number) => (
             <div
               className="bg-gray-100 p-6 rounded-md w-[200px]"
               key={index}

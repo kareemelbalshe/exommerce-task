@@ -8,3 +8,7 @@ export const store = configureStore({
         wishList: wishListReducer, 
     }
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;

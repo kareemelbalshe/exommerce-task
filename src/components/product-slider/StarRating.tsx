@@ -1,10 +1,12 @@
-import React from "react";
+interface RatingProp {
+  rating: number;
+}
 
-const StarRating = ({ rating }) => {
+const StarRating = ({ rating }: RatingProp) => {
   const percentage = (rating / 5) * 100;
 
   return (
-    <div
+    <div dir="ltr"
       className="star-rating"
       style={{ position: "relative", fontSize: "24px", color: "#d3d3d3" }}
     >

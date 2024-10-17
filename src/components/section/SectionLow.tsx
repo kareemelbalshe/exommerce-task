@@ -1,4 +1,3 @@
-import React from "react";
 import FireTruckIcon from '@mui/icons-material/FireTruck';
 import HeadsetMicIcon from '@mui/icons-material/HeadsetMic';
 import CheckIcon from '@mui/icons-material/Check';

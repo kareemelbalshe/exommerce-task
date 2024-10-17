@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProductSlider from "../product-slider/ProductSlider";
-import EastIcon from "@mui/icons-material/East";
-import WestIcon from "@mui/icons-material/West";
+import { useLang } from "../../lib/hooks/useLang";
+import DoubleButtons from "../double-buttons/DoubleButtons";
 
 const Section2 = () => {
+  const { isEn } = useLang();
+
+  const [click, setClick] = useState("");
+
   const initialTime = 3 * 24 * 60 * 60;
 
   const [timeLeft, setTimeLeft] = useState(initialTime);
@@ -21,16 +25,24 @@ const Section2 = () => {
   const minutes = Math.floor((timeLeft % (60 * 60)) / 60);
   const seconds = timeLeft % 60;
 
-  const [click, setClick] = useState("");
-
   return (
-    <div className="pl-6 md:pl-20 lg:pl-28 py-20 flex flex-col">
+    <div
+      className={`${
+        isEn ? "pl-6 md:pl-20 lg:pl-28" : "pr-6 md:pr-20 lg:pr-28"
+      } py-20 flex flex-col`}
+    >
       <h3 className="flex gap-1 justify-start items-center text-red-500">
         <span className="w-5 h-10 bg-red-500 rounded-md"></span> Today's
       </h3>
       <div className="flex gap-5 flex-col md:flex-row">
-        <h1 className="w-[200px] text-2xl md:text-3xl lg:text-4xl font-bold">Flash Sale</h1>
-        <div className="flex items-center justify-between flex-col md:flex-row gap-10 w-full md:pr-20 lg:pr-28">
+        <h1 className="w-[200px] text-2xl md:text-3xl lg:text-4xl font-bold">
+          Flash Sale
+        </h1>
+        <div
+          className={`flex items-center justify-between flex-col md:flex-row gap-10 w-full ${
+            isEn ? "md:pr-20 lg:pr-28 " : "md:pl-20 lg:pl-28 "
+          }`}
+        >
           <div className="flex justify-center items-end gap-5 lg:gap-10">
             <div className="">
               <p>days</p>
@@ -52,24 +64,15 @@ const Section2 = () => {
               <h2 className="text-3xl font-bold">{seconds}</h2>
             </div>
           </div>
-          <div className="flex gap-5">
-            <button
-              onClick={() => setClick("left")}
-              className="rounded-full bg-gray-300 p-2"
-            >
-              <WestIcon />
-            </button>
-            <button
-              onClick={() => setClick("right")}
-              className="rounded-full bg-gray-300 p-2"
-            >
-              <EastIcon />
-            </button>
-          </div>
+          <DoubleButtons setClick={setClick} />
         </div>
       </div>
 
-      <ProductSlider url={`https://fakestoreapi.com/products`} click={click} setClick={setClick} />
+      <ProductSlider
+        url={`https://fakestoreapi.com/products`}
+        click={click}
+        setClick={setClick}
+      />
       <div className="flex items-center justify-center">
         <button className="btn">View All products</button>
       </div>

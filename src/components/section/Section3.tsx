@@ -1,6 +1,3 @@
-import React from "react";
-import WestIcon from "@mui/icons-material/West";
-import EastIcon from "@mui/icons-material/East";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 
 const Section3 = () => {
@@ -13,20 +10,11 @@ const Section3 = () => {
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">
           Browse by category
         </h1>
-        <div className="flex gap-5">
-          <button className="rounded-full bg-gray-300 p-2 hover:bg-gray-400 transition-all">
-            <WestIcon />
-          </button>
-          <button className="rounded-full bg-gray-300 p-2 hover:bg-gray-400 transition-all">
-            <EastIcon />
-          </button>
-        </div>
       </div>
 
-      {/* عناصر الفئات */}
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5 my-10">
         {Array(9)
-          .fill()
+          .fill("")
           .map((_, index) => (
             <div
               key={index}

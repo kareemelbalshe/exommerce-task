@@ -2,10 +2,16 @@ import SendIcon from "@mui/icons-material/Send";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { useTheme } from "../../lib/hooks/ThemeContext";
 
 const Footer = () => {
+  const { isDarkMode } = useTheme();
+
   return (
-    <div className="bg-black text-white">
+    <div
+      dir="ltr"
+      className={`${!isDarkMode ? "bg-black" : "bg-gray-800"} text-white`}
+    >
       <div className="flex flex-col gap-5 px-6 py-3 md:gap-8 md:px-16 md:py-5 lg:px-28 lg:flex-row lg:justify-between">
         <div className="flex flex-col gap-1 items-start flex-1">
           <h1 className="text-lg md:text-xl lg:text-2xl">Exclusive</h1>
@@ -15,7 +21,9 @@ const Footer = () => {
           </p>
           <div className="relative w-full max-w-xs">
             <input
-              className="bg-black text-slate-400 border-2 border-slate-50 outline-none rounded-sm py-1 px-3 w-full"
+              className={`${
+                !isDarkMode ? "bg-black" : "bg-gray-800"
+              } text-slate-400 border-2 border-slate-50 outline-none rounded-sm py-1 px-3 w-full`}
               placeholder="Enter your email"
             />
             <SendIcon className="absolute right-2 top-1/2 -translate-y-1/2 text-white" />
@@ -96,7 +104,7 @@ const Footer = () => {
       </div>
 
       <hr className="my-4" />
-      <div className="py-5 text-center bg-black text-white">
+      <div className="py-5 text-center text-white">
         <p className="text-xs md:text-sm lg:text-base">© 2024 Exclusive</p>
       </div>
     </div>

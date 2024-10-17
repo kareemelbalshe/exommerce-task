@@ -1,31 +1,46 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import StarRating from "./StarRating";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite"; // استيراد الأيقونة المفضلة
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useFetch } from "../../lib/hooks/useFetch";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux"; // أضف useSelector
-import { cartAction } from "../rtk/slices/cart-slice";
-import { wishListAction } from "../rtk/slices/love-slice";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { truncate } from "../../lib/hooks/truncate";
+import { truncate } from "../../lib/functions/truncate";
+import { wishListAction } from "../../lib/rtk/slices/love-slice";
+import { cartAction } from "../../lib/rtk/slices/cart-slice";
+import { RootState } from "../../lib/rtk/store";
+import { Product } from "../../lib/types/types";
+import { useLang } from "../../lib/hooks/useLang";
 
-export default function ProductSlider({ url, click, setClick }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const { wishList } = useSelector((state) => state.wishList); // الحصول على قائمة الأمنيات
+interface ProductSliderProps {
+  url: string;
+  click: string;
+  setClick?: ((click: string) => void) | undefined;
+}
 
-  const navigate = useNavigate()
+export default function ProductSlider({
+  url,
+  click,
+  setClick,
+}: ProductSliderProps) {
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const { wishList } = useSelector((state: RootState) => state.wishList);
+
+  const { isEn } = useLang();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (click === "left") {
-      if(currentIndex>=0)
-      goPrev();
+      if (currentIndex >= 0) goPrev();
     } else if (click === "right") {
       goNext();
     }
   }, [click]);
 
-  const { data, loading, error } = useFetch(url);
+  const { data, loading, error } = useFetch<Product[]>(url);
 
   const dispatch = useDispatch();
 
@@ -33,21 +48,25 @@ export default function ProductSlider({ url, click, setClick }) {
   if (error) return <p>Error: {error}</p>;
 
   const goNext = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex + 1) % data.length
-    );
-    setClick("");
+    if (currentIndex < data.length - 5) {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length);
+      setClick("");
+    }
   };
 
   const goPrev = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + data.length) % data.length 
-    );
-    setClick("");
+    if (currentIndex > 0) {
+      setCurrentIndex(
+        (prevIndex) => (prevIndex - 1 + data.length) % data.length
+      );
+      setClick("");
+    }
   };
 
-  const isInWishlist = (item) => {
-    return wishList.some((wishlistItem) => wishlistItem.id === item.id);
+  const isInWishlist = (item: Product) => {
+    return wishList.some(
+      (wishlistItem: Product) => wishlistItem.id === item.id
+    );
   };
 
   return (
@@ -72,7 +91,10 @@ export default function ProductSlider({ url, click, setClick }) {
                 />
               )}
 
-              <RemoveRedEyeIcon onClick={()=>navigate(`/product/${item.id}`)} className="absolute right-2 top-12" />
+              <RemoveRedEyeIcon
+                onClick={() => navigate(`/product/${item.id}`)}
+                className="absolute right-2 top-12"
+              />
 
               <button
                 onClick={() => {

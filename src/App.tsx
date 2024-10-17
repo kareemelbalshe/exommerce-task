@@ -1,9 +1,4 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Outlet,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Header from "./components/header/Header";
 import UpHeader from "./components/header/UpHeader";
 import Footer from "./components/footer/Footer";
@@ -20,6 +15,7 @@ import Login from "./pages/auth/Login";
 import WishList from "./pages/wish-list/WishList";
 import Look from "./pages/look/Look";
 import ProductByCategory from "./pages/product-by-category/ProductByCategory";
+import { ThemeProvider } from "./lib/hooks/ThemeContext";
 
 const router = createBrowserRouter([
   {
@@ -84,14 +80,16 @@ const router = createBrowserRouter([
 
 function Layout() {
   return (
-    <div>
+    <ThemeProvider>
+      {" "}
+      {/* Ensure ThemeProvider wraps everything */}
       <UpHeader />
       <Header />
-      <div className="content">
+      <div className="content dark:bg-gray-800 dark:text-white">
         <Outlet />
       </div>
       <Footer />
-    </div>
+    </ThemeProvider>
   );
 }
 
