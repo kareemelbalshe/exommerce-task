@@ -7,8 +7,10 @@ const ProductByCategory = () => {
   const { isEn } = useLang();
 
   return (
-    <div className={`${isEn?"ml-6 lg:ml-28":"mr-6 lg:mr-28"}`}>
-      <ProductSlider click="" setClick={undefined}
+    <div className={`${isEn ? "ml-6 lg:ml-28" : "mr-6 lg:mr-28"}`}>
+      <ProductSlider
+        click=""
+        setClick={undefined}
         url={`https://fakestoreapi.com/products/category/${categoryId}`}
       />
     </div>

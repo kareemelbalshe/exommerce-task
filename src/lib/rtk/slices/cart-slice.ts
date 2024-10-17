@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ProductQ } from "../../types/types";
 
 export const cartSlice = createSlice({
   name: "cartSlice",
@@ -7,19 +8,19 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
-      const findProduct = state.products.find(product => product.id === action.payload.id);
+      const findProduct = state.products.find(
+        (product: ProductQ) => product.id === action.payload.id
+      );
       if (findProduct) {
-        if(action.payload.quantity>0){
-          findProduct.quantity+=action.payload.quantity;
-        }
-        else{
+        if (action.payload.quantity > 0) {
+          findProduct.quantity += action.payload.quantity;
+        } else {
           findProduct.quantity += 1;
         }
       } else {
-        if(action.payload.quantity>0){
+        if (action.payload.quantity > 0) {
           state.products.push({ ...action.payload });
-        }
-        else{
+        } else {
           state.products.push({ ...action.payload, quantity: 1 });
         }
       }
@@ -27,19 +28,23 @@ export const cartSlice = createSlice({
     },
     updateQuantity: (state, action) => {
       const { id, quantity } = action.payload;
-      const findProduct = state.products.find(product => product.id === id);
+      const findProduct = state.products.find(
+        (product: ProductQ) => product.id === id
+      );
       if (findProduct) {
         findProduct.quantity = quantity;
       }
-      localStorage.setItem("products", JSON.stringify(state.products)); 
+      localStorage.setItem("products", JSON.stringify(state.products));
     },
     deleteFromCart: (state, action) => {
-      state.products = state.products.filter(product => product.id !== action.payload.id);
-      localStorage.setItem("products", JSON.stringify(state.products)); 
+      state.products = state.products.filter(
+        (product: ProductQ) => product.id !== action.payload.id
+      );
+      localStorage.setItem("products", JSON.stringify(state.products));
     },
     clear: (state) => {
       state.products = [];
-      localStorage.removeItem("products"); 
+      localStorage.removeItem("products");
     },
   },
 });

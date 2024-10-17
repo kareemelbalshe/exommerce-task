@@ -51,11 +51,11 @@ const Section1 = () => {
         <ul className="mt-10">
           <li className="flex justify-between">
             <Link to="/look">lorem-lorem</Link>
-            <ChevronRightIcon className={`${!isEn&&"rotate-180"}`} />
+            <ChevronRightIcon className={`${!isEn && "rotate-180"}`} />
           </li>
           <li className="flex justify-between">
             <Link to="/look">lorem-lorem</Link>
-            <ChevronRightIcon className={`${!isEn&&"rotate-180"}`} />
+            <ChevronRightIcon className={`${!isEn && "rotate-180"}`} />
           </li>
           {data?.map((item: string, index: number) => (
             <li key={index} className="flex justify-between">

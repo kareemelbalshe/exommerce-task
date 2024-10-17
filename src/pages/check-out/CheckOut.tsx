@@ -7,10 +7,15 @@ const CheckOut = () => {
   const inp: string[] = ["name", "z", "s", "cb", "gvj", "klk"];
   const { products } = useSelector((state: RootState) => state.cart);
 
-  const [inputValues, setInputValues] = useState<string[]>(Array(inp.length).fill(""));
+  const [inputValues, setInputValues] = useState<string[]>(
+    Array(inp.length).fill("")
+  );
   const [errors, setErrors] = useState<string[]>(Array(inp.length).fill(""));
 
-  const handleChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = e.target.value;
 
     const regex = /^[a-zA-Z\u0600-\u06FF ]*$/;

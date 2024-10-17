@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Product } from "../../types/types";
 
 export const wishListSlice = createSlice({
   name: "wishListSlice",
@@ -8,12 +9,12 @@ export const wishListSlice = createSlice({
   reducers: {
     addToWishList: (state, action) => {
       const findProduct = state.wishList.find(
-        (product) => product.id === action.payload.id
+        (product: Product) => product.id === action.payload.id
       );
 
       if (findProduct) {
         state.wishList = state.wishList.filter(
-          (product) => product.id !== action.payload.id
+          (product: Product) => product.id !== action.payload.id
         );
         localStorage.setItem("wishList", JSON.stringify(state.wishList));
       } else {

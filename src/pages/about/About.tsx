@@ -41,25 +41,25 @@ const About = () => {
   useEffect(() => {
     setTimeout(() => {
       setCurrentIndex(1);
-    }, 3000); 
+    }, 3000);
   }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       goToNext();
-    }, 3000); 
-    return () => clearInterval(interval); 
+    }, 3000);
+    return () => clearInterval(interval);
   }, [currentIndex]);
 
   const goToNext = () => {
     if (currentIndex < data.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      setCurrentIndex(0); 
+      setCurrentIndex(0);
     }
   };
 
-  const goToSlide = (index:number) => {
+  const goToSlide = (index: number) => {
     setCurrentIndex(index);
   };
 
@@ -79,7 +79,10 @@ const About = () => {
 
   return (
     <div className="">
-      <div dir="ltr" className="flex flex-col items-center justify-between gap-10 mt-20 lg:flex-row mx-6  lg:mx-0 lg:ml-28">
+      <div
+        dir="ltr"
+        className="flex flex-col items-center justify-between gap-10 mt-20 lg:flex-row mx-6  lg:mx-0 lg:ml-28"
+      >
         <div className="">
           <h1 className="text-6xl">Our story</h1>
           <p>
@@ -114,10 +117,7 @@ const About = () => {
       <div className="lg:mx-28 mb-20">
         <div className="flex items-center flex-col justify-center gap-10 mt-20 lg:flex-row lg:mx-28 overflow-x-hidden">
           {visibleItems().map((item, index: number) => (
-            <div
-              className="bg-gray-100 p-6 rounded-md w-[200px]"
-              key={index}
-            >
+            <div className="bg-gray-100 p-6 rounded-md w-[200px]" key={index}>
               <h1 className="text-xl font-bold text-center">{item.username}</h1>
               <p className="text-center text-gray-600">{item.email}</p>
               <p className="text-center text-gray-600">{item.phone}</p>

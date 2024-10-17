@@ -6,7 +6,8 @@ const StarRating = ({ rating }: RatingProp) => {
   const percentage = (rating / 5) * 100;
 
   return (
-    <div dir="ltr"
+    <div
+      dir="ltr"
       className="star-rating"
       style={{ position: "relative", fontSize: "24px", color: "#d3d3d3" }}
     >

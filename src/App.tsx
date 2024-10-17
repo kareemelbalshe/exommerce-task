@@ -82,7 +82,6 @@ function Layout() {
   return (
     <ThemeProvider>
       {" "}
-      {/* Ensure ThemeProvider wraps everything */}
       <UpHeader />
       <Header />
       <div className="content dark:bg-gray-800 dark:text-white">

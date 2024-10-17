@@ -7,7 +7,7 @@
     @apply outline-none;
   }
   .dark {
-    @apply bg-gray-800 text-white; 
+    @apply bg-gray-800 text-white;
   }
 }
 @layer components {

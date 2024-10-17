@@ -14,9 +14,11 @@ const Section4 = () => {
         <span className="w-5 h-10 bg-red-500 rounded-md"></span> This month
       </h3>
 
-      <div className={`flex items-center justify-between flex-col md:flex-row gap-10 w-full ${
-            isEn ? "md:pr-20 lg:pr-28 " : "md:pl-20 lg:pl-28 "
-          }`}>
+      <div
+        className={`flex items-center justify-between flex-col md:flex-row gap-10 w-full ${
+          isEn ? "md:pr-20 lg:pr-28 " : "md:pl-20 lg:pl-28 "
+        }`}
+      >
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">
           Best selling products
         </h1>
