@@ -1,10 +1,9 @@
 import WestIcon from "@mui/icons-material/West";
 import EastIcon from "@mui/icons-material/East";
 import { useLang } from "../../lib/hooks/useLang";
+import { DoubleButtonsProps } from "../../lib/enterfaces/interfase";
 
-interface DoubleButtonsProps {
-  setClick: (direction: "left" | "right") => void;
-}
+
 const DoubleButtons = ({ setClick }: DoubleButtonsProps) => {
   const { isEn } = useLang();
 

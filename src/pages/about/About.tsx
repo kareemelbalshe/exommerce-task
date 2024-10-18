@@ -52,10 +52,13 @@ const About = () => {
   }, [currentIndex]);
 
   const goToNext = () => {
-    if (currentIndex < data.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    } else {
-      setCurrentIndex(0);
+    const validData = data as [];
+    if (validData.length > 0) {
+      if (currentIndex < validData?.length - 1) {
+        setCurrentIndex(currentIndex + 1);
+      } else {
+        setCurrentIndex(0);
+      }
     }
   };
 
@@ -64,14 +67,18 @@ const About = () => {
   };
 
   const visibleItems = () => {
-    if (currentIndex + 3 <= data.length) {
-      return data.slice(currentIndex, currentIndex + 3);
-    } else {
-      return [
-        ...data.slice(currentIndex, data.length),
-        ...data.slice(0, (currentIndex + 3) % data.length),
-      ];
+    const validData = Array.isArray(data) ? data : [];
+    if (validData.length > 0) {
+      if (currentIndex + 3 <= validData.length) {
+        return validData.slice(currentIndex, currentIndex + 3);
+      } else {
+        return [
+          ...validData.slice(currentIndex, validData.length),
+          ...validData.slice(0, (currentIndex + 3) % validData.length),
+        ];
+      }
     }
+    return [];
   };
 
   if (loading) return <p>Loading...</p>;
@@ -116,28 +123,28 @@ const About = () => {
       </div>
       <div className="lg:mx-28 mb-20">
         <div className="flex items-center flex-col justify-center gap-10 mt-20 lg:flex-row lg:mx-28 overflow-x-hidden">
-          {visibleItems().map((item, index: number) => (
+          {visibleItems()?.map((item: any, index: number) => (
             <div className="bg-gray-100 p-6 rounded-md w-[200px]" key={index}>
               <h1 className="text-xl font-bold text-center">{item.username}</h1>
               <p className="text-center text-gray-600">{item.email}</p>
               <p className="text-center text-gray-600">{item.phone}</p>
             </div>
-          ))}
+          )) || []}
         </div>
 
-        {/* الدوائر للتنقل بين الشرائح */}
         <div className="flex gap-3 mt-10 mb-20 items-center justify-center m-auto">
-          {Array.from({ length: data.length }).map((_, index) => (
-            <span
-              key={index}
-              className={`w-4 h-4 rounded-full cursor-pointer transition-all duration-300 ${
-                currentIndex === index
-                  ? "bg-red-600 border-2 border-slate-500 scale-125" // الشكل النشط مع تأثير تكبير
-                  : "bg-gray-400"
-              }`}
-              onClick={() => goToSlide(index)}
-            ></span>
-          ))}
+          {Array.isArray(data) &&
+            Array.from({ length: data.length }).map((_, index) => (
+              <span
+                key={index}
+                className={`w-4 h-4 rounded-full cursor-pointer transition-all duration-300 ${
+                  currentIndex === index
+                    ? "bg-red-600 border-2 border-slate-500 scale-125"
+                    : "bg-gray-400"
+                }`}
+                onClick={() => goToSlide(index)}
+              ></span>
+            ))}
         </div>
         <SectionLow />
       </div>

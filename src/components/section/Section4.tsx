@@ -33,7 +33,7 @@ const Section4 = () => {
       <ProductSlider
         url={`https://fakestoreapi.com/products/category/jewelery`}
         click={""}
-        setClick={undefined}
+        setClick={()=>{}}
       />
     </div>
   );

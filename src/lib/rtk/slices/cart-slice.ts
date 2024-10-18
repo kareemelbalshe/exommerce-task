@@ -4,8 +4,7 @@ import { ProductQ } from "../../types/types";
 export const cartSlice = createSlice({
   name: "cartSlice",
   initialState: {
-    products: JSON.parse(localStorage.getItem("products")) || [],
-  },
+products: JSON.parse(localStorage.getItem("products") || "[]"),  },
   reducers: {
     addToCart: (state, action) => {
       const findProduct = state.products.find(

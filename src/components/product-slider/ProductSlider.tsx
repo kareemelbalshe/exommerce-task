@@ -12,12 +12,11 @@ import { wishListAction } from "../../lib/rtk/slices/love-slice";
 import { cartAction } from "../../lib/rtk/slices/cart-slice";
 import { RootState } from "../../lib/rtk/store";
 import { Product } from "../../lib/types/types";
-import { useLang } from "../../lib/hooks/useLang";
 
 interface ProductSliderProps {
   url: string;
   click: string;
-  setClick?: ((click: string) => void) | undefined;
+  setClick: (direction: "left" | "right" | "") => void;
 }
 
 export default function ProductSlider({
@@ -27,8 +26,6 @@ export default function ProductSlider({
 }: ProductSliderProps) {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const { wishList } = useSelector((state: RootState) => state.wishList);
-
-  const { isEn } = useLang();
 
   const navigate = useNavigate();
 
@@ -48,18 +45,21 @@ export default function ProductSlider({
   if (error) return <p>Error: {error}</p>;
 
   const goNext = () => {
-    if (currentIndex < data.length - 5) {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length);
+    if (data && Array.isArray(data) && currentIndex < data?.length - 5) {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % data?.length);
       setClick("");
     }
   };
 
   const goPrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(
-        (prevIndex) => (prevIndex - 1 + data.length) % data.length
-      );
-      setClick("");
+    const validData = data as Product[];
+    if (validData.length > 0) {
+      if (currentIndex > 0) {
+        setCurrentIndex(
+          (prevIndex) => (prevIndex - 1 + validData?.length) % validData?.length
+        );
+        setClick("");
+      }
     }
   };
 
@@ -72,13 +72,12 @@ export default function ProductSlider({
   return (
     <div className="flex gap-5 items-start my-10 overflow-x-scroll hide-scrollbar">
       {data
-        .slice(currentIndex, currentIndex + data.length)
+        ?.slice(currentIndex, currentIndex + data?.length)
         .map((item, index) => (
           <div className="flex gap-2 items-start flex-col" key={index}>
             <div className="w-60 h-60 flex justify-center items-center relative overflow-hidden group">
               <img className="w-32" src={item.image} alt="" />
 
-              {/* التحقق من حالة المنتج في قائمة الأمنيات */}
               {isInWishlist(item) ? (
                 <FavoriteIcon
                   onClick={() => dispatch(wishListAction.addToWishList(item))}
@@ -108,8 +107,8 @@ export default function ProductSlider({
             </div>
             <h1>{truncate(item.title, 20)}</h1>
             <p>Price: {item.price} $</p>
-            <StarRating rating={item.rating.rate} />
-            <span>({item.rating.count})</span>
+            <StarRating rating={item?.rating?.rate} />
+            <span>({item?.rating?.count})</span>
           </div>
         ))}
     </div>

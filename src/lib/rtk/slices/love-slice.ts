@@ -4,7 +4,7 @@ import { Product } from "../../types/types";
 export const wishListSlice = createSlice({
   name: "wishListSlice",
   initialState: {
-    wishList: JSON.parse(localStorage.getItem("wishList")) || [],
+    wishList: JSON.parse(localStorage.getItem("wishList") || "[]"),
   },
   reducers: {
     addToWishList: (state, action) => {

@@ -51,11 +51,11 @@ const ProductDetails = () => {
       </div>
       <div className="flex-1 flex flex-col gap-5">
         <div className="">
-          <h1 className="h11">{data.title}</h1>
-          <p>Price: {data.price} $</p>
-          <StarRating rating={data.rating.rate} />
-          <span>({data.rating.count})</span>
-          <p>({data.description})</p>
+          <h1 className="h11">{data?.title}</h1>
+          <p>Price: {data?.price} $</p>
+          <StarRating rating={data?.rating?.rate ?? 0} />
+          <span>({data?.rating?.count})</span>
+          <p>({data?.description})</p>
         </div>
         <hr />
         <div className="flex gap-10 items-center">
@@ -85,18 +85,22 @@ const ProductDetails = () => {
           >
             buy now
           </button>
-          {isInWishlist(data) ? (
-            <FavoriteIcon
-              onClick={() => dispatch(wishListAction.addToWishList(data))}
-              className="cursor-pointer text-red-500 border-[1px] border-gray-500 rounded-sm p-1"
-              style={{ fontSize: "35px" }}
-            />
-          ) : (
-            <FavoriteBorderIcon
-              onClick={() => dispatch(wishListAction.addToWishList(data))}
-              className="cursor-pointer border-[1px] border-gray-500 rounded-sm p-1"
-              style={{ fontSize: "35px" }}
-            />
+          {data && (
+            <div className="">
+              {isInWishlist(data) ? (
+                <FavoriteIcon
+                  onClick={() => dispatch(wishListAction.addToWishList(data))}
+                  className="cursor-pointer text-red-500 border-[1px] border-gray-500 rounded-sm p-1"
+                  style={{ fontSize: "35px" }}
+                />
+              ) : (
+                <FavoriteBorderIcon
+                  onClick={() => dispatch(wishListAction.addToWishList(data))}
+                  className="cursor-pointer border-[1px] border-gray-500 rounded-sm p-1"
+                  style={{ fontSize: "35px" }}
+                />
+              )}
+            </div>
           )}
         </div>
       </div>

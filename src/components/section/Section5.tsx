@@ -37,7 +37,7 @@ const Section5 = () => {
       <ProductSlider
         url={`https://fakestoreapi.com/products/category/men's clothing`}
         click={""}
-        setClick={undefined}
+        setClick={()=>{}}
       />
 
       <div className="flex items-center justify-center mt-8">
