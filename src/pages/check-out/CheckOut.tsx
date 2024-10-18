@@ -35,7 +35,7 @@ const CheckOut = () => {
 
   return (
     <div className="flex my-16 gap-20 flex-col lg:flex-row justify-between items-start sm:mx-6 lg:mx-28">
-      <div className="flex-1 flex flex-col gap-3">
+      <div className="flex-1 flex flex-col gap-3 w-[95%] mx-auto">
         <h1 className="h11">billing details</h1>
         {inp.map((string, index) => (
           <div key={index} className="flex flex-col mb-4">
@@ -66,8 +66,8 @@ const CheckOut = () => {
         </div>
       </div>
 
-      <div className="flex-1">
-        <div className="">
+      <div className="flex-1 w-[95%] m-auto">
+        <div className="flex flex-col">
           {products.map((product: ProductQ, index: number) => (
             <div
               key={index}
@@ -88,7 +88,7 @@ const CheckOut = () => {
           ))}
         </div>
 
-        <div className="flex flex-col w-full py-4 rounded-md ">
+        <div className="flex flex-col py-4 rounded-md ">
           <div className="flex items-center justify-between border-b-[1px] border-gray-400 py-3">
             <h2>subtotal</h2>
             <p className="">
@@ -121,15 +121,15 @@ const CheckOut = () => {
           </div>
         </div>
 
-        <div className="mb-5">
+        <div className="mb-5 flex justify-between flex-col lg:flex-row items-start gap-5 ">
           <input
             type="text"
             placeholder="coupon code"
-            className="py-3 px-7 border-[1px] border-gray-800 rounded-md mr-5"
+            className="py-3 px-7 border-[1px] border-gray-800 rounded-md"
           />
           <button className="btn">apply coupon</button>
         </div>
-        <button className="btn">place order</button>
+        <button className="btn m-auto">place order</button>
       </div>
     </div>
   );

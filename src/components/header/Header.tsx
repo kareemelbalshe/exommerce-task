@@ -93,15 +93,12 @@ const Header = () => {
         </button>
         <ul
           ref={menuRef}
-          className={`z-20 flex flex-col bg-slate-400 md:flex-row items-center justify-center gap-4 md:gap-10 md:mt-0 absolute rounded-md right-full w-full p-5 md:static md:p-0 md:bg-transparent transition-transform duration-300 md:h-auto ${
-            isEn
-              ? isMenuOpen
-                ? "translate-x-[100%]"
-                : "-translate-x-7"
-              : isMenuOpen
-              ? "translate-x-[210%]"
-              : "translate-x-[100%] lg:translate-x-0"
-          } translate-y-0`}
+          className={`z-20 flex flex-col bg-slate-400 md:flex-row items-center justify-center gap-4 md:gap-10 md:mt-0 absolute rounded-md right-full w-full p-5 md:static md:p-0 md:bg-transparent transition-transform duration-300 md:h-auto 
+              ${isEn && isMenuOpen && "translate-x-[100%]"}
+              ${isEn && !isMenuOpen && "-translate-x-7"}
+              ${!isEn && isMenuOpen && "translate-x-[100%] lg:translate-x-0"}
+              ${!isEn && !isMenuOpen && "translate-x-[210%]"}
+          translate-y-0`}
         >
           <li>
             <Link

@@ -3,22 +3,34 @@ import { useNavigate } from "react-router-dom";
 import { cartAction } from "../../lib/rtk/slices/cart-slice";
 import { RootState } from "../../lib/rtk/store";
 import { ProductQ } from "../../lib/types/types";
+import { useLang } from "../../lib/hooks/useLang";
 
 const Cart = () => {
   const navigate = useNavigate();
   const { products } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
+  const { isEn } = useLang();
 
   return (
     <div className="mx-6 lg:mx-28">
       <table className="min-w-full bg-white rounded-lg my-10">
         <thead>
           <tr className="flex items-center justify-between shadow-md rounded-md border-b border-gray-200 py-3 px-4">
-            <th className="flex-1 text-left">Product</th>
-            <th className="flex-1 text-left">Price</th>
-            <th className="flex-1 text-left">Quantity</th>
-            <th className="flex-1 text-left">Subtotal</th>
-            <th className="flex-1 text-left">Delete</th>
+            <th className={`flex-1 ${isEn ? "text-left" : "text-right"}`}>
+              Product
+            </th>
+            <th className={`flex-1 ${isEn ? "text-left" : "text-right"}`}>
+              Price
+            </th>
+            <th className={`flex-1 ${isEn ? "text-left" : "text-right"}`}>
+              Quantity
+            </th>
+            <th className={`flex-1 ${isEn ? "text-left" : "text-right"}`}>
+              Subtotal
+            </th>
+            <th className={`flex-1 ${isEn ? "text-left" : "text-right"}`}>
+              Delete
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -34,7 +46,9 @@ const Cart = () => {
               <td className="flex-1">
                 <input
                   type="number"
-                  className="w-11 border-[1px] rounded-md pl-1 border-gray-400"
+                  className={`w-11 border-[1px] rounded-md ${
+                    isEn ? "pl-1" : "pr-1"
+                  } border-gray-400`}
                   value={product.quantity}
                   onChange={(e) =>
                     Number(e.target.value) > 0 &&
