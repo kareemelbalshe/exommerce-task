@@ -44,11 +44,11 @@ const Section1 = () => {
   return (
     <div className="flex gap-10 item-start mx-6 lg:mx-28 flex-col lg:flex-row">
       <div
-        className={`w-1/2 lg:w-2/12 lg:m-0 m-auto ${
+        className={`lg:w-2/12 w-[80%] lg:m-0 m-auto ${
           isEn ? "lg:border-r-2" : "lg:border-l-2"
         }  lg:border-slate-300`}
       >
-        <ul className="mt-10">
+        <ul className="mt-10 w-full">
           <li className="flex justify-between">
             <Link to="/look">lorem-lorem</Link>
             <ChevronRightIcon className={`${!isEn && "rotate-180"}`} />
@@ -64,10 +64,10 @@ const Section1 = () => {
           ))}
         </ul>
       </div>
-      <div className="flex overflow-hidden relative w-6/12 mt-10 mx-auto">
+      <div className="flex overflow-hidden relative w-full lg:w-6/12 mt-10 mx-auto">
         {/* <button onClick={prevSlide} className="absolute left-0 z-10 bg-white p-2 rounded-full">{"<"}</button> */}
         <div
-          className="flex transition-transform ease-in-out duration-500"
+          className="flex transition-transform ease-in-out duration-500 w-full"
           style={{
             transform: `${isEn ? "translateX(-" : "translateX("}${
               currentIndex * 100

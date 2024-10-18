@@ -140,7 +140,7 @@ const Header = () => {
         </ul>
       </div>
 
-      <div className="relative flex flex-row items-center gap-3 justify-center mt-5 lg:mt-0 mx-6 lg:mx-0">
+      <div className="relative flex flex-wrap lg:flex-row flex-col items-center gap-3 justify-center mt-5 lg:mt-0 mx-6 lg:mx-0">
         <div className="relative">
           <input
             className="bg-slate-300 border-none outline-none pl-5 pr-14 py-2 rounded-md"
